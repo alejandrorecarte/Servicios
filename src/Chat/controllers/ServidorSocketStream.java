@@ -14,15 +14,8 @@ public class ServidorSocketStream {
     private static final int PORT = 5555;
     private static final Set<PrintWriter> writers = new HashSet<>();
 
-    public static void main(String[] args) {
+    public static synchronized void startServer() {
         System.out.println("Chat Server is running...");
-        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            while (true) {
-                new Handler(serverSocket.accept()).start();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private static class Handler extends Thread {
